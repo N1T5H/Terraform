@@ -13,7 +13,7 @@ This project provides a Terraform configuration for setting up a robust remote s
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/your-username/terraform-aws-remote-state-backend.git
+   git clone https://github.com/n1t5h/terraform-aws-remote-state-backend.git
    cd terraform-aws-remote-state-backend
    ```
 
