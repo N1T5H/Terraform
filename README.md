@@ -9,42 +9,23 @@ This project provides a Terraform configuration for setting up a robust remote s
 - **Encryption**: Ensures state files are encrypted at rest in the S3 bucket.
 - **Environment-Specific Configurations**: Supports multiple environments (e.g., dev, staging, prod) through variable files.
 
-## Usage
-
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/n1t5h/terraform-aws-remote-state-backend.git
-   cd terraform-aws-remote-state-backend
-   ```
-
-2. Create a `config/backend-<env>.conf` file for your environment-specific backend configuration.
-
-3. Create a `config/<env>.tfvars` file for your environment-specific variables.
-
-4. Initialize and apply the Terraform configuration:
-   ```bash
-   env=dev
-   terraform get -update=true
-   terraform init -backend-config=config/backend-${env}.conf
-   terraform plan -var-file=config/${env}.tfvars
-   terraform apply -var-file=config/${env}.tfvars
-   ```
-
-## Configuration
-
-The `main.tf` file contains the core configuration for the S3 backend:
-
-```terraform
-terraform {
-  backend "s3" {
-    encrypt = true
-    bucket  = "-terraform-states"
-    key     = "development/service-name.tfstate"
-    region  = "ap-southeast-2"
-    dynamodb_table = "terraform-lock"
-  }
-}
-```
-
-Adjust the `bucket`, `key`, `region`, and `dynamodb_table` values as needed for your specific setup.
+Usage Instructions
+Make sure you're using the correct AWS account:
+bash
+pip install awscli
+aws s3 ls
+If you haven't set a default region in your AWS configuration and want to create resources in "us-east-1":
+bash
+export AWS_DEFAULT_REGION=us-east-1
+export AWS_REGION=us-east-1
+Initialize Terraform:
+bash
+terraform init
+Plan the changes:
+bash
+terraform plan -var="account_id=<your-aws-account-id>"
+Apply the changes:
+bash
+terraform apply -var="account_id=<your-aws-account-id>"
+After applying, Terraform will create an S3 bucket named <account_id>-terraform-states and a DynamoDB table named terraform-lock. These can be used as a backend for other Terraform configurations
 
