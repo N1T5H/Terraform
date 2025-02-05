@@ -5,6 +5,10 @@ The project illustrates:
 - Key AWS components such as VPCs, subnets, security groups, EC2 instances, internet gateways, route tables, and an application load balancer.
 - Best practices for using Terraform and scripting infrastructure as code (IaC).
 
+This project includes the following architecture:
+
+![Architecture Diagram](Terraform.png)
+
 ## Features
 1. **AWS Infrastructure Components:**
    - Custom VPC with CIDR block.
